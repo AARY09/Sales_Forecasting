@@ -1,66 +1,100 @@
-# AI-Based Sales Forecasting System
+# Sales Forecasting
 
-End-to-end pipeline to predict sales from historical time-series data using **ARIMA** and **machine learning**, evaluate with **RMSE/MAPE**, and generate **inventory & revenue planning** insights.
+A complete sales forecasting pipeline for daily time-series data. This project cleans raw sales data, creates features, trains ARIMA and machine learning models, evaluates forecasting performance, and generates visual and business-ready insights.
 
-## Pipeline
+## 🚀 Features
 
-```
-Dataset → Data Cleaning → EDA + Trend Analysis → Feature Engineering
-    → Train/Test Split → ARIMA + ML Models → Evaluation
-    → Forecast Visualization → Business Insight Generation
-```
+- End-to-end forecasting workflow from raw data to model evaluation
+- Time-series data cleaning and missing value handling
+- Exploratory data analysis and trend/seasonality visualization
+- Feature engineering with lag, rolling, and calendar features
+- ARIMA and Gradient Boosting regression models
+- Forecast evaluation with RMSE and MAPE
+- Output reports and charts for planning inventory and revenue
 
-## Quick start
+## 📁 Repository Structure
+
+- `main.py` — Runs the full forecasting pipeline
+- `config.py` — Configuration values, folder paths, forecast settings
+- `requirements.txt` — Python dependencies
+- `data/raw/` — Raw input dataset(s)
+- `data/processed/` — Cleaned and prepared datasets
+- `src/`
+  - `generate_dataset.py` — Generates sample sales data for testing
+  - `data_cleaning.py` — Cleans and preprocesses sales data
+  - `eda.py` — Exploratory data analysis functions and charts
+  - `features.py` — Creates lag, rolling, and calendar features
+  - `models/`
+    - `arima_model.py` — Time-series ARIMA forecasting
+    - `ml_model.py` — Machine learning forecasting models
+  - `evaluation.py` — Model evaluation metrics
+  - `visualization.py` — Plots forecasts and results
+  - `insights.py` — Generates business insight outputs
+- `notebooks/` — Jupyter notebooks for exploratory analysis
+- `outputs/` — Generated charts, figures, and reports
+
+## ✅ Getting Started
+
+1. Clone the repository
 
 ```bash
-cd sales_forecasting
+git clone https://github.com/AARY09/Sales_Forecasting.git
+cd Sales_Forecasting
+```
+
+2. Create and activate a virtual environment
+
+```bash
 python -m venv venv
-venv\Scripts\activate          # Windows
+venv\Scripts\activate
+```
+
+3. Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+4. Run the forecasting pipeline
+
+```bash
 python main.py
 ```
 
-Outputs land in `outputs/figures/` and `outputs/reports/`.
+## 📥 Data Requirements
 
-## Project structure
+Place your dataset at `data/raw/sales_data.csv` and include at minimum:
 
-| Path | Purpose |
-|------|---------|
-| `main.py` | Runs the full pipeline |
-| `config.py` | Paths, horizons, feature settings |
-| `src/generate_dataset.py` | Synthetic daily sales data (replace with your CSV) |
-| `src/data_cleaning.py` | Missing values, outliers, daily frequency |
-| `src/eda.py` | Trends, seasonality, decomposition plots |
-| `src/features.py` | Lags, rolling stats, calendar features |
-| `src/models/arima_model.py` | Auto-ARIMA / SARIMA |
-| `src/models/ml_model.py` | Gradient Boosting regressor |
-| `src/evaluation.py` | RMSE & MAPE |
-| `src/visualization.py` | Forecast & metric charts |
-| `src/insights.py` | Business recommendations JSON/TXT |
-| `notebooks/01_eda_exploration.ipynb` | Interactive EDA |
+- `date` — daily timestamps in `YYYY-MM-DD` format
+- `sales` — numeric sales values
 
-## Use your own dataset
+Optional columns:
+- `units_sold`
+- `region`
 
-Place a CSV at `data/raw/sales_data.csv` with columns:
+If `data/raw/sales_data.csv` is missing, the project may generate a sample dataset for testing.
 
-- `date` — daily timestamps (`YYYY-MM-DD`)
-- `sales` — numeric target (revenue or units)
+## 📊 Output
 
-Optional: `units_sold`, `region`. Then run `python main.py` (skip auto-generation if the file exists).
+Generated files are written into:
 
-## Models
+- `outputs/figures/` — charts and visualizations
+- `outputs/reports/` — summary reports and business insights
 
-- **ARIMA**: `pmdarima.auto_arima` with weekly seasonality (SARIMA) for stable univariate forecasts.
-- **ML**: Gradient Boosting on lag, rolling, and calendar features for non-linear patterns.
+## 🧠 Models
 
-The pipeline selects the best model on the **test holdout** (lowest RMSE) for business insights.
+- **ARIMA** for univariate time-series forecasting
+- **Gradient Boosting** for feature-based machine learning forecasting
 
-## Resume / portfolio bullets
+The pipeline evaluates both approaches and reports performance using RMSE and MAPE.
 
-- Implemented ARIMA and ML models to predict sales trends from historical time-series data.
-- Evaluated models using RMSE/MAPE and optimized for stable long-term forecasting.
-- Converted forecasts into actionable business insights for inventory and revenue planning.
+## ✨ Notes
 
-## Requirements
+- Designed for daily sales forecasting and inventory planning
+- Easy to extend with new datasets or additional model types
+- Includes notebook support for exploratory analysis
 
-Python 3.10+. See `requirements.txt`.
+## 📌 Requirements
+
+- Python 3.10+
+- See `requirements.txt` for package dependencies
